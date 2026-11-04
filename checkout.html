@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout – ShopSphere</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Sticky Header Navbar -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-sphere-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+          <span>Shop<span class="brand-accent">Sphere</span></span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="shop.html" class="nav-link">Shop</a></li>
+          <li><a href="cart.html" class="nav-link">Cart</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <div class="secure-checkout-badge">
+            <i class="fa-solid fa-lock text-success"></i>
+            <span>Simulated SSL Checkout</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Checkout Container -->
+  <main class="checkout-page">
+    <div class="container">
+      
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs" aria-label="Breadcrumbs">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:0.75rem;"></i>
+        <a href="cart.html">Cart</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:0.75rem;"></i>
+        <span class="current">Checkout</span>
+      </nav>
+
+      <h1 style="font-size: 2rem; margin-bottom: 24px; font-weight: 800;">Secure Checkout</h1>
+
+      <div class="checkout-layout">
+        <!-- Left: Form Steps -->
+        <div class="checkout-form-container">
+          <form id="checkout-form">
+            
+            <!-- Step 1: Customer Contact -->
+            <div class="checkout-step-card">
+              <div class="step-card-header">
+                <div class="step-number">1</div>
+                <h3>Customer Information</h3>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="checkout-name" class="form-label">Full Name *</label>
+                  <input type="text" id="checkout-name" class="form-input" placeholder="e.g. John Doe" required>
+                </div>
+                <div class="form-group">
+                  <label for="checkout-email" class="form-label">Email Address *</label>
+                  <input type="email" id="checkout-email" class="form-input" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                  <label for="checkout-phone" class="form-label">Phone Number (Optional)</label>
+                  <input type="tel" id="checkout-phone" class="form-input" placeholder="+1 (555) 000-0000">
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Shipping Destination -->
+            <div class="checkout-step-card" style="margin-top: 24px;">
+              <div class="step-card-header">
+                <div class="step-number">2</div>
+                <h3>Shipping Address</h3>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label for="checkout-street" class="form-label">Street Address *</label>
+                <input type="text" id="checkout-street" class="form-input" placeholder="123 Main Street, Apt 4B" required>
+              </div>
+
+              <div class="form-grid-3">
+                <div class="form-group">
+                  <label for="checkout-city" class="form-label">City *</label>
+                  <input type="text" id="checkout-city" class="form-input" placeholder="Springfield" required>
+                </div>
+                <div class="form-group">
+                  <label for="checkout-state" class="form-label">State / Region *</label>
+                  <input type="text" id="checkout-state" class="form-input" placeholder="Oregon" required>
+                </div>
+                <div class="form-group">
+                  <label for="checkout-zip" class="form-label">Postal / Zip Code *</label>
+                  <input type="text" id="checkout-zip" class="form-input" placeholder="97477" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Payment Method (Simulated Flow) -->
+            <div class="checkout-step-card" style="margin-top: 24px;">
+              <div class="step-card-header">
+                <div class="step-number">3</div>
+                <h3>Payment Method</h3>
+              </div>
+
+              <!-- Payment Method Selection Grid -->
+              <div class="payment-methods-grid">
+                <div class="payment-method-card selected" data-method="card">
+                  <i class="fa-regular fa-credit-card"></i>
+                  <span>Card (Demo)</span>
+                </div>
+                <div class="payment-method-card" data-method="paypal">
+                  <i class="fa-brands fa-paypal"></i>
+                  <span>PayPal (Demo)</span>
+                </div>
+                <div class="payment-method-card" data-method="cod">
+                  <i class="fa-solid fa-hand-holding-dollar"></i>
+                  <span>Cash on Delivery</span>
+                </div>
+              </div>
+
+              <!-- Card Subform -->
+              <div class="payment-subform" data-method="card">
+                <div class="simulated-badge">
+                  <i class="fa-solid fa-shield"></i> Simulated Demo Payment – Do not enter real credit cards
+                </div>
+                <div class="form-group" style="margin-bottom: 12px;">
+                  <label class="form-label">Simulated Card Number</label>
+                  <input type="text" class="form-input" value="•••• •••• •••• 4242" readonly>
+                </div>
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Expiry</label>
+                    <input type="text" class="form-input" value="12/28" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">CVC / CVV</label>
+                    <input type="text" class="form-input" value="•••" readonly>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PayPal Subform -->
+              <div class="payment-subform" data-method="paypal" style="display:none;">
+                <div class="simulated-badge">
+                  <i class="fa-brands fa-paypal"></i> Simulated Sandbox Flow
+                </div>
+                <p style="font-size:0.875rem; color:var(--text-muted);">
+                  Clicking "Place Order" will simulate authenticating with a PayPal sandbox wallet and return you directly to the confirmation receipt.
+                </p>
+              </div>
+
+              <!-- COD Subform -->
+              <div class="payment-subform" data-method="cod" style="display:none;">
+                <div class="simulated-badge">
+                  <i class="fa-solid fa-truck-ramp-box"></i> Pay Upon Delivery
+                </div>
+                <p style="font-size:0.875rem; color:var(--text-muted);">
+                  You will pay the exact total in cash or mobile transfer when the package arrives at your doorstep.
+                </p>
+              </div>
+
+              <!-- Submit Action Button -->
+              <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-place-order" style="margin-top: 24px;">
+                <i class="fa-solid fa-lock"></i> Place Order (Demo Mode)
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Right: Order Summary Sticky Panel -->
+        <aside class="checkout-review-card" aria-label="Order Summary">
+          <h3 class="checkout-review-title">Order Summary</h3>
+
+          <!-- Items list -->
+          <div class="checkout-items-list" id="checkout-items-list">
+            <!-- Populated by Checkout.renderOrderSummary() -->
+          </div>
+
+          <!-- Totals block -->
+          <div class="checkout-totals-block" id="checkout-totals">
+            <!-- Populated by Checkout.renderOrderSummary() -->
+          </div>
+
+          <div class="demo-notice-alert" style="margin-top: 0;">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Placing this order creates an order history entry in LocalStorage and clears your cart.</span>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/checkout.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      Checkout.init();
+    });
+  </script>
+</body>
+</html>

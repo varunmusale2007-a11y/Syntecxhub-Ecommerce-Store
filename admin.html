@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – ShopSphere</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="admin-body">
+
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar" aria-label="Admin Navigation">
+    <div class="admin-brand">
+      <div class="logo-sphere-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <a href="admin.html" class="brand-logo">
+        <span>Shop<span class="brand-accent">Sphere</span></span>
+      </a>
+    </div>
+
+    <ul class="admin-nav-menu">
+      <li>
+        <a href="#overview" class="admin-nav-item active" data-tab="overview">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Overview</span>
+        </a>
+      </li>
+      <li>
+        <a href="#products" class="admin-nav-item" data-tab="products">
+          <i class="fa-solid fa-boxes-stacked"></i>
+          <span>Products</span>
+        </a>
+      </li>
+      <li>
+        <a href="#orders" class="admin-nav-item" data-tab="orders">
+          <i class="fa-solid fa-dolly"></i>
+          <span>Orders</span>
+        </a>
+      </li>
+      <li>
+        <a href="#categories" class="admin-nav-item" data-tab="categories">
+          <i class="fa-solid fa-tags"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li>
+        <a href="#users" class="admin-nav-item" data-tab="users">
+          <i class="fa-solid fa-users"></i>
+          <span>Users</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="admin-sidebar-footer">
+      <button class="btn-sidebar-store" onclick="Admin.resetFactoryData()" title="Restore default catalog seed data">
+        <i class="fa-solid fa-arrow-rotate-left"></i> Reset Seed Data
+      </button>
+      <a href="index.html" class="btn-sidebar-store">
+        <i class="fa-solid fa-store"></i> View Live Store
+      </a>
+      <button onclick="Auth.logout()" class="btn-sidebar-store" style="color:#f87171;">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Admin Main Content Area -->
+  <div class="admin-main">
+    
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="admin-page-heading">
+        <h2>Store Control Center</h2>
+      </div>
+
+      <div class="admin-topbar-actions">
+        <div class="admin-user-profile">
+          <i class="fa-solid fa-user-shield text-primary"></i>
+          <span id="admin-display-name">Store Administrator</span>
+        </div>
+        <a href="index.html" class="btn btn-outline btn-sm">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Storefront
+        </a>
+      </div>
+    </header>
+
+    <!-- Admin Content Workspace -->
+    <main class="admin-content">
+
+      <!-- ==================== TAB 1: OVERVIEW ==================== -->
+      <section class="admin-tab-section active" id="tab-overview">
+        <!-- Stats Cards Grid -->
+        <div class="stats-cards-grid">
+          <div class="stat-card">
+            <div class="stat-icon products">
+              <i class="fa-solid fa-box-archive"></i>
+            </div>
+            <div class="stat-details">
+              <h4>Total Products</h4>
+              <div class="stat-number" id="stat-total-products">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon orders">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div class="stat-details">
+              <h4>Total Orders</h4>
+              <div class="stat-number" id="stat-total-orders">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon users">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="stat-details">
+              <h4>Registered Users</h4>
+              <div class="stat-number" id="stat-total-users">0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon revenue">
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+            <div class="stat-details">
+              <h4>Total Revenue</h4>
+              <div class="stat-number" id="stat-total-revenue">$0.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Orders Table Preview -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>Recent Customer Orders</h3>
+            <button class="btn btn-outline btn-sm" onclick="document.querySelector('[data-tab=orders]').click()">
+              View All Orders
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="admin-recent-orders-tbody">
+                <!-- Injected via Admin.renderStats() -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Demo Architecture Notice -->
+        <div class="demo-notice-alert">
+          <i class="fa-solid fa-circle-info"></i>
+          <span><strong>Engineering Note:</strong> All administrative modifications (adding/editing products, updating shipment statuses) persist into browser <code>LocalStorage</code> and immediately reflect across customer-facing catalog pages.</span>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: PRODUCTS ==================== -->
+      <section class="admin-tab-section" id="tab-products">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>Product Catalog Management</h3>
+            <div class="admin-table-controls">
+              <input type="text" 
+                     placeholder="Search product or category..." 
+                     class="admin-search-input" 
+                     oninput="Admin.handleProductSearch(this.value)">
+              <button class="btn btn-primary btn-sm" onclick="Admin.openAddProductModal()">
+                <i class="fa-solid fa-plus"></i> Add New Product
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Product Details</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Rating</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: ORDERS ==================== -->
+      <section class="admin-tab-section" id="tab-orders">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>Customer Orders & Fulfillment</h3>
+            <div class="admin-table-controls">
+              <select class="sort-select" onchange="Admin.filterOrdersByStatus(this.value)">
+                <option value="all">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Placed Date</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Status (Change Live)</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="admin-orders-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4: CATEGORIES ==================== -->
+      <section class="admin-tab-section" id="tab-categories">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>Manage Store Categories</h3>
+          </div>
+
+          <form id="add-category-form" onsubmit="Admin.handleAddCategory(event)" style="display:flex; gap:12px; max-width:500px; margin-bottom: 24px;">
+            <input type="text" id="new-category-name" placeholder="Enter new category name..." class="form-input" required>
+            <button type="submit" class="btn btn-primary" style="white-space:nowrap;">
+              <i class="fa-solid fa-plus"></i> Add Category
+            </button>
+          </form>
+
+          <div class="admin-category-grid" id="admin-categories-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 5: USERS ==================== -->
+      <section class="admin-tab-section" id="tab-users">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>Registered Demo Users</h3>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>User Full Name</th>
+                  <th>Email</th>
+                  <th>Assigned Role</th>
+                  <th>Created Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Product Add / Edit Modal -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="product-modal-title">Add New Product</h3>
+        <button class="modal-close-btn" onclick="Admin.closeModal('product-modal')" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="product-form" onsubmit="Admin.saveProductForm(event)">
+          <input type="hidden" id="prod-form-id">
+
+          <div class="prod-form-grid">
+            <div class="form-group full-span">
+              <label class="form-label">Product Name *</label>
+              <input type="text" id="prod-form-name" class="form-input" placeholder="e.g. AuraSound Pro Wireless ANC Headphones" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Category *</label>
+              <select id="prod-form-category" class="form-input" required>
+                <option value="Electronics">Electronics</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Home & Kitchen">Home & Kitchen</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Books">Books</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Stock Quantity *</label>
+              <input type="number" id="prod-form-stock" class="form-input" min="0" value="20" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Selling Price ($) *</label>
+              <input type="number" id="prod-form-price" class="form-input" step="0.01" min="0" placeholder="149.99" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Original / List Price ($)</label>
+              <input type="number" id="prod-form-original-price" class="form-input" step="0.01" min="0" placeholder="199.99">
+            </div>
+
+            <div class="form-group full-span">
+              <label class="form-label">Image URL</label>
+              <input type="url" id="prod-form-image" class="form-input" placeholder="https://images.unsplash.com/...">
+              <small class="text-muted">Leave empty to use automatic SVG category placeholder.</small>
+            </div>
+
+            <div class="form-group full-span">
+              <label class="form-label">Product Description</label>
+              <textarea id="prod-form-desc" class="form-input" rows="3" placeholder="Describe the item's specifications and key benefits..."></textarea>
+            </div>
+
+            <div class="form-group full-span checkbox-group">
+              <label class="checkbox-filter-label">
+                <input type="checkbox" id="prod-form-featured">
+                <span>Featured Product</span>
+              </label>
+              <label class="checkbox-filter-label">
+                <input type="checkbox" id="prod-form-bestseller">
+                <span>Best Seller Badge</span>
+              </label>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content: flex-end; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-light);">
+            <button type="button" class="btn btn-outline" onclick="Admin.closeModal('product-modal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Order Modal for Admin -->
+  <div class="modal-overlay" id="order-details-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Order Invoice Breakdown</h3>
+        <button class="modal-close-btn" onclick="Orders.closeOrderModal()" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="order-modal-body">
+        <!-- Rendered by Orders.showOrderModal() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      Admin.init();
+    });
+  </script>
+</body>
+</html>

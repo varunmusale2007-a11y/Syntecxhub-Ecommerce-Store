@@ -1,0 +1,382 @@
+/* ==========================================================================
+   ShopSphere - Responsive Media Queries (responsive.css)
+   Ensures flawless presentation across Desktop, Tablet & Mobile devices
+   ========================================================================== */
+
+/* Mobile Drawer Navigation */
+.mobile-nav-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.mobile-nav-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  max-width: 85%;
+  height: 100%;
+  background-color: var(--bg-surface-elevated);
+  z-index: 1001;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform var(--transition-smooth);
+  overflow-y: auto;
+}
+
+.mobile-nav-drawer.open {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.mobile-drawer-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-links a:hover,
+.mobile-nav-links a.active {
+  background-color: var(--primary-blue-subtle);
+  color: var(--primary-blue);
+}
+
+.mobile-drawer-footer {
+  padding: 20px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   Tablet & Medium Desktops (max-width: 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .products-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shop-layout {
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  .stats-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-sidebar {
+    width: 220px;
+  }
+
+  .admin-main {
+    margin-left: 220px;
+  }
+}
+
+/* ==========================================================================
+   Tablets & Mobile Landscape (max-width: 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Navigation */
+  .nav-links,
+  .nav-search-wrap {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 50px 0 70px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-title {
+    font-size: 2.3rem;
+  }
+
+  .hero-image-card img {
+    height: 340px;
+  }
+
+  .hero-stats-row {
+    gap: 20px;
+  }
+
+  /* Categories & Features */
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features-strip {
+    margin-top: -20px;
+    margin-bottom: 50px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  /* Promo Banner */
+  .promo-banner {
+    grid-template-columns: 1fr;
+    padding: 36px 24px;
+  }
+
+  .promo-title {
+    font-size: 2rem;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Shop Layout (Filters & Grid) */
+  .shop-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-sidebar {
+    position: static;
+  }
+
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Product Details */
+  .product-showcase-grid {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 32px;
+  }
+
+  .detail-product-title {
+    font-size: 1.7rem;
+  }
+
+  .product-perks-list {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs-nav-header {
+    gap: 16px;
+  }
+
+  /* Cart & Checkout */
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-header-row {
+    display: none;
+  }
+
+  .cart-item {
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    position: relative;
+    padding: 16px 0;
+  }
+
+  .cart-item-price {
+    display: none;
+  }
+
+  .cart-item-price-mobile {
+    display: block;
+  }
+
+  .cart-item-quantity {
+    grid-column: 2;
+  }
+
+  .cart-item-total {
+    grid-column: 2;
+    text-align: right;
+  }
+
+  .cart-item-action {
+    position: absolute;
+    top: 14px;
+    right: 0;
+  }
+
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid-2,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-methods-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-quick-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal-grid-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Admin */
+  .admin-sidebar {
+    transform: translateX(-100%);
+    transition: transform var(--transition-normal);
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .admin-main {
+    margin-left: 0;
+  }
+
+  .stats-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prod-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prod-form-grid .full-span {
+    grid-column: span 1;
+  }
+
+  .admin-category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Small Mobile Phones (max-width: 576px)
+   ========================================================================== */
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .products-grid-4,
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-card {
+    padding: 24px 18px;
+  }
+
+  .confirmation-card {
+    padding: 24px 16px;
+  }
+
+  .order-quick-info {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sort-select {
+    width: 100%;
+  }
+
+  .buttons-group-row {
+    flex-direction: column;
+  }
+
+  .btn-detail-wishlist {
+    width: 100%;
+    text-align: center;
+  }
+}
+

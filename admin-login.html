@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal Login – ShopSphere</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body style="background-color: #0f172a;">
+
+  <main class="auth-page">
+    <div class="auth-card" style="border-top: 4px solid var(--primary-blue);">
+      <div class="auth-header">
+        <a href="index.html" class="brand-logo" style="justify-content: center; margin-bottom: 12px;">
+          <div class="logo-sphere-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <span>Shop<span class="brand-accent">Sphere</span> Admin</span>
+        </a>
+        <h1 class="auth-title">Administrative Portal</h1>
+        <p class="auth-subtitle">Authorized management access for catalog & orders</p>
+      </div>
+
+      <!-- Quick Fill Box -->
+      <div class="demo-credentials-box" style="background-color: #eff6ff;">
+        <div class="demo-title">
+          <i class="fa-solid fa-key"></i> Demo Admin Account Credentials
+        </div>
+        <p style="font-size:0.8125rem; margin-bottom:8px; color:var(--text-body);">
+          Email: <code>admin@shopsphere.com</code><br>
+          Password: <code>admin123</code>
+        </p>
+        <button type="button" class="btn btn-secondary btn-sm btn-block" onclick="fillAdminCredentials()">
+          <i class="fa-solid fa-bolt"></i> Auto-Fill Admin Credentials
+        </button>
+      </div>
+
+      <!-- Admin Login Form -->
+      <form class="auth-form" id="admin-login-form">
+        <div class="form-group">
+          <label for="admin-email" class="form-label">Administrator Email</label>
+          <div class="input-with-icon">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="admin-email" class="form-input" placeholder="admin@shopsphere.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="admin-password" class="form-label">Password</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="admin-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+            <button type="button" class="password-toggle-btn" id="toggleAdminPass" aria-label="Toggle password">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+          <span class="input-error-msg" id="admin-error"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-admin-submit">
+          <i class="fa-solid fa-right-to-bracket"></i> Authenticate Administrator
+        </button>
+      </form>
+
+      <div class="auth-switch-prompt">
+        <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Return to Public Store</a>
+      </div>
+
+      <!-- Security Notice -->
+      <div class="demo-notice-alert">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span><strong>Architecture Notice:</strong> Role check verifies the "admin" role flag in LocalStorage. A production application requires server-side JWT verification and secure HTTP-only cookies.</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    function fillAdminCredentials() {
+      document.getElementById("admin-email").value = "admin@shopsphere.com";
+      document.getElementById("admin-password").value = "admin123";
+      if (typeof Toast !== "undefined") {
+        Toast.show("Admin credentials filled", "info");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.getElementById("toggleAdminPass");
+      const pass = document.getElementById("admin-password");
+      if (toggle && pass) {
+        toggle.addEventListener("click", () => {
+          const type = pass.getAttribute("type") === "password" ? "text" : "password";
+          pass.setAttribute("type", type);
+          const icon = toggle.querySelector("i");
+          if (icon) {
+            icon.classList.toggle("fa-eye");
+            icon.classList.toggle("fa-eye-slash");
+          }
+        });
+      }
+
+      const form = document.getElementById("admin-login-form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("admin-email").value.trim();
+        const password = document.getElementById("admin-password").value;
+        const err = document.getElementById("admin-error");
+        err.classList.remove("visible");
+
+        const result = Auth.login(email, password, "admin");
+
+        if (result.success) {
+          Toast.show("Admin authenticated successfully!", "success");
+          setTimeout(() => {
+            window.location.href = "admin.html";
+          }, 800);
+        } else {
+          err.textContent = result.message;
+          err.classList.add("visible");
+          Toast.show(result.message, "error");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

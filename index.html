@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSphere – Shop Smart. Shop Easy.</title>
+  <meta name="description" content="ShopSphere is your premier destination for curated electronics, designer fashion, kitchen essentials, luxury accessories, and bestselling books.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Announcement Promo Bar -->
+  <aside class="announcement-bar" aria-label="Special Offers">
+    <div class="container">
+      <span>🎉 <strong>Flash Promo:</strong> Enjoy 20% OFF with code <code>SAVE20</code> | Free shipping on orders over $50!</span>
+    </div>
+  </aside>
+
+  <!-- Main Sticky Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Brand Logo -->
+        <a href="index.html" class="brand-logo">
+          <div class="logo-sphere-icon">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <span>Shop<span class="brand-accent">Sphere</span></span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="shop.html" class="nav-link">Shop</a></li>
+          <li><a href="shop.html?category=Electronics" class="nav-link">Electronics</a></li>
+          <li><a href="shop.html?category=Fashion" class="nav-link">Fashion</a></li>
+          <li><a href="orders.html" class="nav-link">My Orders</a></li>
+        </ul>
+
+        <!-- Live Search Bar -->
+        <div class="nav-search-wrap">
+          <form class="nav-search-form" action="shop.html" method="GET">
+            <input type="text" name="search" class="nav-search-input" placeholder="Search products, brands, gear..." aria-label="Search catalog">
+            <button type="submit" class="nav-search-btn" aria-label="Search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Action Icons & Auth -->
+        <div class="nav-actions">
+          <!-- Wishlist -->
+          <a href="shop.html" class="nav-action-btn" title="View Wishlist" aria-label="Wishlist">
+            <i class="fa-regular fa-heart"></i>
+            <span class="count-badge wishlist-count-badge" style="display:none;">0</span>
+          </a>
+
+          <!-- Cart -->
+          <a href="cart.html" class="nav-action-btn" title="Shopping Cart" aria-label="Shopping Cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="count-badge cart-count-badge" style="display:none;">0</span>
+          </a>
+
+          <!-- User Session / Auth Controls -->
+          <div class="nav-auth-container">
+            <!-- Dynamically populated by main.js (Auth state) -->
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation Drawer">
+    <div class="mobile-drawer-header">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-sphere-icon">
+          <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+        <span>Shop<span class="brand-accent">Sphere</span></span>
+      </a>
+      <button id="closeMobileNavBtn" aria-label="Close navigation menu" style="font-size: 1.25rem; color: var(--text-muted);">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <div class="mobile-drawer-body">
+      <form class="nav-search-form" action="shop.html" method="GET">
+        <input type="text" name="search" class="nav-search-input" placeholder="Search products..." aria-label="Search products">
+        <button type="submit" class="nav-search-btn" aria-label="Submit search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="shop.html"><i class="fa-solid fa-store"></i> All Products</a></li>
+        <li><a href="shop.html?category=Electronics"><i class="fa-solid fa-laptop"></i> Electronics</a></li>
+        <li><a href="shop.html?category=Fashion"><i class="fa-solid fa-shirt"></i> Fashion</a></li>
+        <li><a href="shop.html?category=Home & Kitchen"><i class="fa-solid fa-kitchen-set"></i> Home & Kitchen</a></li>
+        <li><a href="shop.html?category=Accessories"><i class="fa-solid fa-clock"></i> Accessories</a></li>
+        <li><a href="shop.html?category=Books"><i class="fa-solid fa-book"></i> Books</a></li>
+        <li><a href="orders.html"><i class="fa-solid fa-box-open"></i> My Orders</a></li>
+        <li><a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin Portal</a></li>
+      </ul>
+    </div>
+
+    <div class="mobile-drawer-footer">
+      <a href="cart.html" class="btn btn-outline btn-block">
+        <i class="fa-solid fa-cart-shopping"></i> View Cart
+      </a>
+      <a href="login.html" class="btn btn-primary btn-block">
+        <i class="fa-solid fa-user"></i> Account Login
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Banner -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-pill">
+              <i class="fa-solid fa-sparkles"></i> 2026 Spring Collection is Live
+            </div>
+            <h1 class="hero-title">
+              Shop Smart.<br>
+              <span>Shop Easy.</span>
+            </h1>
+            <p class="hero-subtitle">
+              Discover carefully curated tech gadgets, modern fashion, premium kitchenware, handcrafted accessories, and essential books engineered for refined living.
+            </p>
+            <div class="hero-cta-group">
+              <a href="shop.html" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-bag-shopping"></i> Explore Catalog
+              </a>
+              <a href="#categories" class="btn btn-outline btn-lg" style="color:#ffffff; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05);">
+                Popular Categories <i class="fa-solid fa-arrow-down"></i>
+              </a>
+            </div>
+
+            <div class="hero-stats-row">
+              <div class="hero-stat">
+                <h3>25+</h3>
+                <p>Curated Items</p>
+              </div>
+              <div class="hero-stat">
+                <h3>4.9★</h3>
+                <p>Customer Rating</p>
+              </div>
+              <div class="hero-stat">
+                <h3>100%</h3>
+                <p>Verified Demo</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-image-card">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="Premium AuraSound Headphones">
+              <div class="hero-floating-badge">
+                <div class="floating-icon">
+                  <i class="fa-solid fa-shield-heart"></i>
+                </div>
+                <div class="floating-text">
+                  <strong>Premium Quality</strong>
+                  <span>Engineered for excellence</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Propositions / Features Strip -->
+    <section class="features-strip">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="feature-icon-circle">
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <div class="feature-info">
+              <h4>Free Express Shipping</h4>
+              <p>On all orders exceeding $50.00</p>
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon-circle">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+            <div class="feature-info">
+              <h4>30-Day Easy Returns</h4>
+              <p>Hassle-free demo exchanges</p>
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon-circle">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="feature-info">
+              <h4>Secure Checkout</h4>
+              <p>Simulated encrypted checkout</p>
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon-circle">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <div class="feature-info">
+              <h4>24/7 Dedicated Care</h4>
+              <p>Friendly instant assistance</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Categories -->
+    <section class="categories-section" id="categories">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Collections</span>
+            <h2 class="section-title">Explore by Category</h2>
+            <p class="section-subtitle">Find exactly what you need with our organized collections</p>
+          </div>
+          <a href="shop.html" class="btn btn-outline">
+            View All Categories <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="categories-grid" id="home-categories-grid">
+          <!-- Dynamically populated or seeded with categories -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products-section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Handpicked</span>
+            <h2 class="section-title">Featured Products</h2>
+            <p class="section-subtitle">Our top recommendations for modern creators and professionals</p>
+          </div>
+          <a href="shop.html" class="btn btn-outline">
+            View All Products <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="products-grid-4" id="home-featured-grid">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Promotional Special Offers Countdown Banner -->
+    <section class="promo-banner-section">
+      <div class="container">
+        <div class="promo-banner">
+          <div class="promo-content">
+            <span class="promo-tag">Limited Time Event</span>
+            <h2 class="promo-title">Spring Tech & Lifestyle Extravaganza</h2>
+            <p class="promo-desc">
+              Upgrade your setup with up to 30% discount on noise-cancelling headphones, luxury leather accessories, and developer gear.
+            </p>
+
+            <div class="promo-countdown" id="promo-countdown">
+              <div class="countdown-box">
+                <span class="count-num" id="cd-days">03</span>
+                <span class="count-unit">Days</span>
+              </div>
+              <div class="countdown-box">
+                <span class="count-num" id="cd-hours">14</span>
+                <span class="count-unit">Hours</span>
+              </div>
+              <div class="countdown-box">
+                <span class="count-num" id="cd-mins">42</span>
+                <span class="count-unit">Mins</span>
+              </div>
+              <div class="countdown-box">
+                <span class="count-num" id="cd-secs">19</span>
+                <span class="count-unit">Secs</span>
+              </div>
+            </div>
+
+            <a href="shop.html" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-bolt"></i> Claim Discount (Use SAVE20)
+            </a>
+          </div>
+
+          <div class="promo-image-box">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" alt="Chronos Apex Smartwatch">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best-Selling Products -->
+    <section class="products-section" style="background-color: var(--bg-surface); padding-top: 60px;">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-tag">Most Popular</span>
+            <h2 class="section-title">Best-Selling Favorites</h2>
+            <p class="section-subtitle">Loved and trusted by thousands of customers worldwide</p>
+          </div>
+          <a href="shop.html" class="btn btn-outline">
+            Browse All <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="products-grid-4" id="home-bestseller-grid">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Testimonials -->
+    <section class="testimonials-section">
+      <div class="container">
+        <div class="section-header text-center" style="justify-content: center; margin-bottom: 48px;">
+          <div>
+            <span class="section-tag">Social Proof</span>
+            <h2 class="section-title">What Our Shoppers Say</h2>
+            <p class="section-subtitle">Real experiences from customers shopping on ShopSphere</p>
+          </div>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "The AuraSound Pro ANC headphones exceeded all expectations. Acoustic clarity is astounding, the build is lightweight, and delivery was remarkably fast!"
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt="Elena Rostova" class="author-avatar">
+              <div class="author-details">
+                <h5>Elena Rostova</h5>
+                <span>Software Architect</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "Finally an e-commerce platform that gets clean design right! Finding products, applying discount vouchers, and checking out is silky smooth."
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Marcus Chen" class="author-avatar">
+              <div class="author-details">
+                <h5>Marcus Chen</h5>
+                <span>Product Designer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "The Vanguard Leather Weekender bag has accompanied me on 5 flights now. The craftsmanship and leather scent are top-tier luxury."
+            </p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Sophia Alverez" class="author-avatar">
+              <div class="author-details">
+                <h5>Sophia Alverez</h5>
+                <span>Creative Director</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Professional Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-col-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="logo-sphere-icon">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+            <span>Shop<span class="brand-accent">Sphere</span></span>
+          </a>
+          <p class="footer-tagline">Shop Smart. Shop Easy.</p>
+          <p class="footer-desc">
+            ShopSphere is a full-featured e-commerce engineering showcase featuring client-side persistence, responsive design tokens, and modular vanilla JavaScript.
+          </p>
+          <div class="social-links">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop Catalog</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+            <li><a href="cart.html">Shopping Cart</a></li>
+            <li><a href="admin-login.html">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html?category=Electronics">Electronics</a></li>
+            <li><a href="shop.html?category=Fashion">Fashion & Apparel</a></li>
+            <li><a href="shop.html?category=Home & Kitchen">Home & Kitchen</a></li>
+            <li><a href="shop.html?category=Accessories">Luxury Accessories</a></li>
+            <li><a href="shop.html?category=Books">Books & Learning</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Stay Connected</h4>
+          <p style="font-size:0.875rem; color:#94a3b8; margin-bottom:14px;">
+            Subscribe to receive periodic discounts, secret drops, and product alerts.
+          </p>
+          <form class="footer-newsletter-form" id="newsletter-form">
+            <div class="newsletter-input-group">
+              <input type="email" placeholder="Enter your email address..." required aria-label="Newsletter email">
+              <button type="submit" class="btn btn-primary" aria-label="Subscribe to newsletter">Join</button>
+            </div>
+            <small style="color:#64748b; font-size:0.75rem;">Get 15% off your next demo purchase.</small>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>&copy; 2026 ShopSphere E-Commerce. All rights reserved. Syntecxhub Engineering Internship Project.</p>
+        <div class="footer-badges">
+          <i class="fa-brands fa-cc-visa" title="Visa"></i>
+          <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+          <i class="fa-brands fa-cc-paypal" title="PayPal"></i>
+          <i class="fa-brands fa-cc-apple-pay" title="Apple Pay"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    // Initialize Home Page dynamic sections
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Render Categories
+      const categories = Storage.getCategories();
+      const catContainer = document.getElementById("home-categories-grid");
+      if (catContainer) {
+        catContainer.innerHTML = categories.map(cat => `
+          <a href="shop.html?category=${encodeURIComponent(cat.name)}" class="category-card">
+            <img src="${cat.image}" alt="${cat.name}" onerror="this.src=getPlaceholderImage('${cat.name}', '${cat.name}')">
+            <div class="category-card-content">
+              <h3>${cat.name}</h3>
+              <span>${cat.description || "Explore collection"}</span>
+            </div>
+          </a>
+        `).join("");
+      }
+
+      // 2. Render Featured Products
+      const allProducts = Storage.getProducts();
+      const featured = allProducts.filter(p => p.featured).slice(0, 4);
+      const featuredContainer = document.getElementById("home-featured-grid");
+      if (featuredContainer) {
+        Products.renderGrid(featured, featuredContainer);
+      }
+
+      // 3. Render Best-Sellers
+      const bestSellers = allProducts.filter(p => p.bestSeller).slice(0, 4);
+      const bestSellerContainer = document.getElementById("home-bestseller-grid");
+      if (bestSellerContainer) {
+        Products.renderGrid(bestSellers, bestSellerContainer);
+      }
+
+      // 4. Countdown Timer Simulation
+      let secondsRemaining = 3 * 24 * 3600 + 14 * 3600 + 42 * 60 + 19;
+      const daysEl = document.getElementById("cd-days");
+      const hoursEl = document.getElementById("cd-hours");
+      const minsEl = document.getElementById("cd-mins");
+      const secsEl = document.getElementById("cd-secs");
+
+      setInterval(() => {
+        if (secondsRemaining > 0) {
+          secondsRemaining--;
+          const d = Math.floor(secondsRemaining / (24 * 3600));
+          const h = Math.floor((secondsRemaining % (24 * 3600)) / 3600);
+          const m = Math.floor((secondsRemaining % 3600) / 60);
+          const s = secondsRemaining % 60;
+          if (daysEl) daysEl.textContent = String(d).padStart(2, "0");
+          if (hoursEl) hoursEl.textContent = String(h).padStart(2, "0");
+          if (minsEl) minsEl.textContent = String(m).padStart(2, "0");
+          if (secsEl) secsEl.textContent = String(s).padStart(2, "0");
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

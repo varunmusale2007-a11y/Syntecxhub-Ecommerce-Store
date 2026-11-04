@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In – ShopSphere</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Sticky Header Navbar -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-sphere-icon">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <span>Shop<span class="brand-accent">Sphere</span></span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="shop.html" class="nav-link">Shop</a></li>
+          <li><a href="orders.html" class="nav-link">My Orders</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="cart.html" class="nav-action-btn" title="Shopping Cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="count-badge cart-count-badge" style="display:none;">0</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Login Card Content -->
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-sphere-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+          <span>Shop<span class="brand-accent">Sphere</span></span>
+        </a>
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Sign in to your demo account to access orders and preferences</p>
+      </div>
+
+      <!-- Quick Demo Credentials Box -->
+      <div class="demo-credentials-box">
+        <div class="demo-title">
+          <i class="fa-solid fa-bolt"></i> Demo Accounts (Click to Quick-Fill)
+        </div>
+        <div class="demo-buttons-row">
+          <button type="button" class="btn-fill-demo" onclick="fillCredentials('john@example.com', 'password123')">
+            <i class="fa-solid fa-user"></i> Customer Demo
+          </button>
+          <button type="button" class="btn-fill-demo" onclick="fillCredentials('admin@shopsphere.com', 'admin123')">
+            <i class="fa-solid fa-shield-halved"></i> Admin Demo
+          </button>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <form class="auth-form" id="login-form">
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address</label>
+          <div class="input-with-icon">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="email" class="form-input" placeholder="name@example.com" required autocomplete="email">
+          </div>
+          <span class="input-error-msg" id="email-error"></span>
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label for="password" class="form-label">Password</label>
+          </div>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
+            <button type="button" class="password-toggle-btn" id="togglePasswordBtn" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+          <span class="input-error-msg" id="password-error"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-login-submit">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+        </button>
+      </form>
+
+      <div class="auth-switch-prompt">
+        Don't have an account yet? <a href="register.html">Create a free demo account</a>
+      </div>
+
+      <div class="auth-switch-prompt" style="margin-top: 10px; font-size: 0.8125rem;">
+        Staff or store manager? <a href="admin-login.html">Sign in to Admin Dashboard</a>
+      </div>
+
+      <!-- Educational Disclaimer -->
+      <div class="demo-notice-alert">
+        <i class="fa-solid fa-circle-info"></i>
+        <span><strong>Demo Notice:</strong> Authentication is simulated via LocalStorage for frontend portfolio purposes. Easily expandable to real JWT endpoints.</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    function fillCredentials(email, pwd) {
+      document.getElementById("email").value = email;
+      document.getElementById("password").value = pwd;
+      if (typeof Toast !== "undefined") {
+        Toast.show(`Filled demo credentials for ${email}`, "info");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Password visibility toggle
+      const toggleBtn = document.getElementById("togglePasswordBtn");
+      const passwordInput = document.getElementById("password");
+
+      if (toggleBtn && passwordInput) {
+        toggleBtn.addEventListener("click", () => {
+          const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+          passwordInput.setAttribute("type", type);
+          const icon = toggleBtn.querySelector("i");
+          if (icon) {
+            icon.classList.toggle("fa-eye");
+            icon.classList.toggle("fa-eye-slash");
+          }
+        });
+      }
+
+      // Handle Login Form Submit
+      const form = document.getElementById("login-form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const emailErr = document.getElementById("email-error");
+        const passwordErr = document.getElementById("password-error");
+
+        emailErr.classList.remove("visible");
+        passwordErr.classList.remove("visible");
+
+        const result = Auth.login(email, password);
+
+        if (result.success) {
+          Toast.show(result.message, "success");
+          setTimeout(() => {
+            if (result.user.role === "admin") {
+              window.location.href = "admin.html";
+            } else {
+              const redirect = sessionStorage.getItem("shopsphere_redirect") || "index.html";
+              sessionStorage.removeItem("shopsphere_redirect");
+              window.location.href = redirect;
+            }
+          }, 800);
+        } else {
+          passwordErr.textContent = result.message;
+          passwordErr.classList.add("visible");
+          Toast.show(result.message, "error");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
